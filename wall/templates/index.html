@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    {% with messages = get_flashed_messages(with_categories=true) %}
+  {% if messages %}
+    <ul class=flashes>
+    {% for category, message in messages %}
+      <li class="{{ category }}">{{ message }}</li>
+    {% endfor %}
+    </ul>
+  {% endif %}
+{% endwith %}
+    <form action="/create" method="post">
+    FirstName:  <input type="text" name="first_name">
+    LastName:  <input type="text" name="last_name">
+      email:<input type="text" name="email">
+      Password:<input type="password" name="password">
+      Conf.Pwd:<input type="password" name="passwordconf">
+      <input type="submit" value="Create a user">
+    </form>
+    <form action="/process" method="post">
+      email:<input type="text" name="log_email">
+      password:<input type="password" name="log_password">
+      <input type="submit" value="login">
+    </form>
+  </body>
+</html>

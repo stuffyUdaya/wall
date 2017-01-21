@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+    <p>Welcome {{session['newfirst_name']}}, {{session['newid']}}</p>
+    <form  action="/logout" method="post">
+      <input type="submit" value="logout">
+    </form>
+    <h1>You are successfully logged in!!!!!</h1>
+
+    <form action="/mymessage" method="post">
+      <p>{{session['newfirst_name']}}'s Post</p>
+      <textarea name="message" rows="8" cols="80"></textarea>
+      <input type="submit" value="Postit">
+
+    </form>
+    {%for message in all_messages%}
+
+      <h1>{{message['users_name']}} posted</h1>
+      <h6>{{message['message']}}</h6>
+
+
+              {%for comment in all_comments%}
+                {%if comment['message_id'] == message['message_id']%}
+              <h3>{{comment['users_name']}} commented</h3>
+              <h6>{{comment['comment']}}</h6>
+              {%endif%}
+
+                {%endfor%}
+                <form action="/comments/{{message['message_id']}}" method="post">
+                <p>Comments:<textarea name="comment" rows="8" cols="80"></textarea></p>
+                <input type="submit" value="comment">
+              </form>
+      {%endfor%}
+
+  </body>
+</html>
